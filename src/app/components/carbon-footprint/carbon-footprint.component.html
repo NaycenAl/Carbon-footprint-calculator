@@ -1,2 +1,30 @@
 <app-carbon-footprint-form></app-carbon-footprint-form>
 <app-carbon-footprint-result></app-carbon-footprint-result>
+
+
+<div class="info-container">
+    <div class="distance">
+      <p><strong>Distance traveled:</strong> {{ distanceKm }} km</p>
+    </div>
+    <div class="consumption">
+      <p [ngClass]="{ 
+        'low-consumption': Km100Consumption < 4, 
+        'high-consumption': Km100Consumption > 7
+        }">
+        <strong>Consumption per 100 km:</strong> 
+        {{ Km100Consumption }} L/100km
+    </p>
+    </div>
+    <div class="totalconsumption">
+        <p><strong>total:</strong> {{ calculateConsumption() }} </p>
+      </div>
+  </div>
+  
+  @if(Km100Consumption > 7){
+    <p>Warning, your consumption is high</p>
+  }
+
+  
+  @if(Km100Consumption < 4){
+    <p>Congratulations, your consumption is low</p>
+  }

@@ -9,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  public username? : string;
+
+  public ngOnInit() {
+    this.username= "John Doe"
+  }
+
 }
