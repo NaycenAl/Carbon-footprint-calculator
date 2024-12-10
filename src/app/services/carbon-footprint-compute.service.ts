@@ -32,7 +32,6 @@ export class CarbonFootprintComputeService {
    
   }
 
-
   calculateConsumption() {
     return this.totalConsumption = this.distanceKm/this.Km100Consumption;
      
@@ -42,11 +41,6 @@ export class CarbonFootprintComputeService {
      return this.distanceKm = this.distanceKm + 100;
    }
  
-
-  
-
- 
-   
  
    getResumeVoyages(){
   
