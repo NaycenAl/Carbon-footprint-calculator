@@ -1,41 +1,63 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { CarbonFootprintFormComponent } from "../carbon-footprint-form/carbon-footprint-form.component";
 import { CarbonFootprintResultComponent } from "../carbon-footprint-result/carbon-footprint-result.component";
 import { NgClass } from '@angular/common';
+import { CarbonFootprintComputeService } from '../../services/carbon-footprint-compute.service';
 
 @Component({
   selector: 'app-carbon-footprint',
   standalone: true,
-  imports: [CarbonFootprintFormComponent, CarbonFootprintResultComponent, NgClass],
+  imports: [],
   templateUrl: './carbon-footprint.component.html',
   styleUrl: './carbon-footprint.component.css'
 })
+
 export class CarbonFootprintComponent {
 
-  public distanceKm! : number;
-  public Km100Consumption! : number;
-  public totalConsumption?: number;
-  public travels!: any [];
+  public travels?: any[];
+  public distanceKm!: number;
+  public Km100Consumption!: number;
+  public quantityCo2Total! : number;
+
+constructor(private carbonFootprintCompute : CarbonFootprintComputeService){
+
+}
+
+ngOnInit() {
  
+    this.travels = this.carbonFootprintCompute.getTravels();
+    this.distanceKm = this.carbonFootprintCompute.distanceKm;
+    this.Km100Consumption = this.carbonFootprintCompute.Km100Consumption;
 
-  ngOnInit() {
-    this.distanceKm= 150;
-    this.Km100Consumption=3;
-    this.travels = [
-      { distanceKm: 50, Km100Consumption: 5 },
-      { distanceKm: 150, Km100Consumption: 6 },
-      { distanceKm: 250, Km100Consumption: 7 },
-      { distanceKm: 350, Km100Consumption: 8 },
-      { distanceKm: 450, Km100Consumption: 9 }
-  ]
-  }
+    this.calculateAverage()
+}
 
-  calculateConsumption() {
-   return this.totalConsumption = this.distanceKm/this.Km100Consumption;
-    
-  }
-  add100KmToTheDistance() {
-    return this.distanceKm = this.distanceKm + 100;
-  }
+addTravel() {
+  const distance = Math.ceil(Math.random() * 1000)
+  const consumption = Math.ceil(Math.random() * 10)
+  const quantityCo2= distance * consumption / 100 * 2.3;
+  this.carbonFootprintCompute.addTravel({distanceKm : distance, Km100Consumption : consumption, quantityCo2: quantityCo2})
+  this.calculateAverage();
+
+
+}
+
+add100Km() {
+  this.carbonFootprintCompute.add100KmToTheDistance();
+  this.distanceKm = this.carbonFootprintCompute.distanceKm;
+}
+ 
+calculateConsumption() {
+  this.carbonFootprintCompute.calculateConsumption();
+  this.distanceKm = this.carbonFootprintCompute.distanceKm;
+}
+
+calculateAverage(){
+ const resume= this.carbonFootprintCompute.getResumeVoyages();
+
+  this.distanceKm= resume.totalDistance;
+  this.Km100Consumption= resume.averageConsumption;
+  this.quantityCo2Total = resume.quantityCo2Total;
+}
 
 }
