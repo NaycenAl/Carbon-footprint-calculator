@@ -1,23 +1,29 @@
-<nav class="navbar">
-    <div class="navbar-container">
+<nav class="navbar bg-gray-800 text-white px-4 py-3 flex items-center justify-between">
 
-      <a href="/" class="navbar-logo">
-        <img src="assets/carbon-footprint.png" alt="Logo" class="logo" />
-        My App
-      </a>
+  <div class="navbar-container flex items-center gap-6">
+    <!-- Logo -->
+    <a href="/" class="navbar-logo flex items-center gap-1 text-lg font-semibold">
+      <img src="assets/carbon-footprint.png" alt="Logo" class="logo w-8 h-8" />
+      <p>Carbon Footprint Calculator</p>
+    </a>
 
-      <ul class="navbar-links">
-        <li class="navbar-item"><a href="/">Home</a></li>
-        <li class="navbar-item"><a href="/about">About</a></li>
-      </ul>
-    </div>
+    <!-- Navigation Links -->
+    <ul class="navbar-links flex gap-4 items-center ml-60">
+      <li class="navbar-item">
+        <a routerLink="/"  class="hover:text-blue-400 transition">Home</a>
+      </li>
+      <li class="navbar-item">
+        <a (click)="goToSummary()" class="hover:text-blue-400 transition">Summary</a>
+      </li>
+      <li class="navbar-item">
+        <a (click)="logoutAndGoToHome()" class="hover:text-blue-400 transition">Logout</a>
+      </li>
+    </ul>
+  </div>
 
-    <div class="navbar-user">
-        <img src="assets/user1.png" alt="User Icon" class="user-icon" />
-        <span class="username">{{username}}</span>
-      </div>
-    
+  <!-- Profile Acces -->
+  <div class="navbar-user flex flex-col items-center gap-3 ml-6" (click)="goToProfile()">
+    <img src="assets/user1.png" alt="User Icon" class="user-icon w-10 h-10 rounded-full" />
+    <span class="username font-medium">{{ username }}</span>
+  </div>
 </nav>
-
-<h1 text-red-900 text-3xl> Welcome {{username}} </h1>
-  
