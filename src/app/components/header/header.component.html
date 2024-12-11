@@ -8,12 +8,12 @@
     </a>
 
     <!-- Navigation Links -->
-    <ul class="navbar-links flex gap-4 items-center ml-60">
+    <ul class="navbar-links flex gap-4 items-center">
       <li class="navbar-item">
         <a routerLink="/"  class="hover:text-blue-400 transition">Home</a>
       </li>
       <li class="navbar-item">
-        <a (click)="goToSummary()" class="hover:text-blue-400 transition">Summary</a>
+        <a routerLink="/summary" class="hover:text-blue-400 transition">Summary</a>
       </li>
       <li class="navbar-item">
         <a (click)="logoutAndGoToHome()" class="hover:text-blue-400 transition">Logout</a>
@@ -22,8 +22,10 @@
   </div>
 
   <!-- Profile Acces -->
-  <div class="navbar-user flex flex-col items-center gap-3 ml-6" (click)="goToProfile()">
-    <img src="assets/user1.png" alt="User Icon" class="user-icon w-10 h-10 rounded-full" />
+  <div class="navbar-user flex flex-row items-center gap-3 " (click)="goToProfile()">
+
     <span class="username font-medium">{{ username }}</span>
+    <img src="assets/user1.png" alt="User Icon" class="user-icon w-10 h-10 rounded-full" />
+    
   </div>
 </nav>

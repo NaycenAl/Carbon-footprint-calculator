@@ -1,3 +1,17 @@
 
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
 <label for=""></label>
-<input id=""/> 
+<input id="" name="" formControlName="att1"> 
+@if (isSubmited) {
+    @if (form.get('email')?.errors?.['required']){
+        <div class="">Incorrect mail format</div>
+    }
+}
+
+<input type="sumbit">
+</form>
+
+

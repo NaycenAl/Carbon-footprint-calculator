@@ -1,0 +1,47 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-2xl font-bold mb-6 text-center text-gray-700">Login</h2>
+      <form (ngSubmit)="onSubmit()">
+        
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="username"
+            [(ngModel)]="username"
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+          />
+        </div>
+  
+
+        <div class="mb-6">
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            name="password"
+            [(ngModel)]="password"
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+          />
+        </div>
+  
+        
+        <button
+          type="submit"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
+        >
+          Login
+        </button>
+      </form>
+  
+      
+      <p class="text-sm text-gray-600 mt-4 text-center">
+        Pas encore inscrit ?
+        <a href="/signup" class="text-sky-500 hover:underline">Sign up</a>
+      </p>
+    </div>
+  </div>
+  

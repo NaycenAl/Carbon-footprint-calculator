@@ -17,15 +17,15 @@ export class HomeComponent {
 
   }
 
-  
 
   ngAfterContentChecked(){
     if(this.route.snapshot.queryParamMap.has('error')){
       const error= this.route.snapshot.queryParamMap.get('error');
      }
   }
+
   login(){
-    this.userService.login('JP');
+    this.userService.login('JP','m12');
     this.router.navigate(['/summary'])
   }
 
