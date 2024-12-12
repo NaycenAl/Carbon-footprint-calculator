@@ -9,7 +9,7 @@ export class CarbonFootprintComputeService {
   public distanceKm! : number;
   public Km100Consumption! : number;
   public totalConsumption?: number;
-
+  public quantityCo2Total! : number;
 
   constructor() {
 
@@ -28,9 +28,31 @@ export class CarbonFootprintComputeService {
    }
 
   addTravel (travel : any ){
-    this.travels.push(travel)
-   
+
+   switch(travel.travelType){
+    case "car": 
+      travel.quantityCo2 = Math.ceil(travel.distanceKm * travel.Km100Consumption * 2.3 / 100);
+      break;
+    case "plane": 
+    travel.quantityCo2 = Math.ceil(travel.distanceKm * travel.Km100Consumption * 200);
+    break;
+    case "train": 
+    travel.quantityCo2 = Math.ceil(travel.distanceKm * travel.Km100Consumption * 0.03 );
+      break;
+   }
+    this.travels.push(travel);
+
+    
   }
+
+  calculateAverage(){
+    const resume= this.getResumeVoyages();
+  
+    this.distanceKm= resume.totalDistance;
+    this.Km100Consumption= resume.averageConsumption;
+    this.quantityCo2Total = resume.quantityCo2Total;
+  }
+
 
   calculateConsumption() {
     return this.totalConsumption = this.distanceKm/this.Km100Consumption;

@@ -36,9 +36,9 @@ addTravel() {
   const distance = Math.ceil(Math.random() * 1000)
   const consumption = Math.ceil(Math.random() * 10)
   const quantityCo2= distance * consumption / 100 * 2.3;
-  this.carbonFootprintCompute.addTravel({distanceKm : distance, Km100Consumption : consumption, quantityCo2: quantityCo2})
   this.calculateAverage();
-
+  this.carbonFootprintCompute.addTravel({distanceKm : distance, Km100Consumption : consumption, quantityCo2: quantityCo2})
+  
 
 }
 

@@ -16,16 +16,30 @@
         <a routerLink="/summary" class="hover:text-blue-400 transition">Summary</a>
       </li>
       <li class="navbar-item">
+        <a routerLink="/add-travel" class="hover:text-blue-400 transition">Add Travel</a>
+      </li>
+      @if(isUserAuthentificated){
+      <li class="navbar-item">
         <a (click)="logoutAndGoToHome()" class="hover:text-blue-400 transition">Logout</a>
       </li>
+    }
+      @if(!isUserAuthentificated){
+      <li class="navbar-item">
+        <a routerLink="/login" class="hover:text-blue-400 transition">Login</a>
+      </li>}
+
     </ul>
   </div>
 
   <!-- Profile Acces -->
   <div class="navbar-user flex flex-row items-center gap-3 " (click)="goToProfile()">
-
+    @if(isUserAuthentificated){
     <span class="username font-medium">{{ username }}</span>
     <img src="assets/user1.png" alt="User Icon" class="user-icon w-10 h-10 rounded-full" />
+  }
+  @if(!isUserAuthentificated) {
+    <img src="assets/user1.png" alt="User Icon" class="user-icon w-10 h-10 rounded-full" />
+  }
     
   </div>
 </nav>

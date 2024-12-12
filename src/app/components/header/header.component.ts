@@ -13,12 +13,14 @@ export class HeaderComponent {
 
   
    username! : string;
+   isUserAuthentificated! : boolean;
 
   constructor(private router : Router, private userService : UserService){
     
   }
   ngOnInit(){
     this.username= this.userService.getUserName();
+    this.isUserAuthentificated = this.userService.isAuthentificated();
   }
 
 
