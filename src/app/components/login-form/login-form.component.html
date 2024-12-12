@@ -13,6 +13,9 @@
             [(ngModel)]="username"
             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
           />
+          @if(usernameError){
+            <p class="text-red-700">{{usernameError}}</p>
+          }
         </div>
   
 
@@ -26,6 +29,9 @@
             [(ngModel)]="password"
             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
           />
+          @if(passwordError){
+            <p class="text-red-700">{{passwordError}}</p>
+          }
         </div>
   
         
