@@ -3,11 +3,13 @@ import { CarbonFootprintFormComponent } from "../carbon-footprint-form/carbon-fo
 import { CarbonFootprintResultComponent } from "../carbon-footprint-result/carbon-footprint-result.component";
 import { NgClass } from '@angular/common';
 import { CarbonFootprintComputeService } from '../../services/carbon-footprint-compute.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-carbon-footprint',
   standalone: true,
   imports: [],
+  providers : [ApiService],
   templateUrl: './carbon-footprint.component.html',
   styleUrl: './carbon-footprint.component.css'
 })
@@ -42,10 +44,7 @@ addTravel() {
 
 }
 
-add100Km() {
-  this.carbonFootprintCompute.add100KmToTheDistance();
-  this.distanceKm = this.carbonFootprintCompute.distanceKm;
-}
+
  
 calculateConsumption() {
   this.carbonFootprintCompute.calculateConsumption();

@@ -57,10 +57,13 @@ export class CarbonFootprintFormComponent implements OnInit{
     return null;
   }
 
+  
+   
   onSubmit() {
     this.isSubmited = true;
     if (this.form.valid){
        console.log(this.form.value);
+      
        this.carbonFootPrintService.addTravel(this.form.value);
        this.router.navigate(['/summary']);
        this.isSubmited = false;
@@ -71,3 +74,5 @@ export class CarbonFootprintFormComponent implements OnInit{
   }
 
 }
+
+   

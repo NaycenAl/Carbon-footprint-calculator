@@ -40,7 +40,8 @@ export class CarbonFootprintComputeService {
     travel.quantityCo2 = Math.ceil(travel.distanceKm * travel.Km100Consumption * 0.03 );
       break;
    }
-    this.travels.push(travel);
+    
+   this.travels.push(travel);
 
     
   }
