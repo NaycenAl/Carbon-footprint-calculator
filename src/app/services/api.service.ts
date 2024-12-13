@@ -47,7 +47,7 @@ export class ApiService {
   }
 
 
-  calculC02(travel: any) : Observable<number>{
+  calculC02(travel: any) {
     return this
       .calculerTrajet(travel.travelType, {
         distanceKm: travel.distanceKm,
