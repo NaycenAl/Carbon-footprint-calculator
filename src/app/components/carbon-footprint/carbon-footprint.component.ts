@@ -45,28 +45,6 @@ getTravels(): void {
 }
 
 
-addTravel(travel: any) {
-  const distance = Math.ceil(Math.random() * 1000);
-  const consumption = Math.ceil(Math.random() * 10);
-  console.log(distance)
-  // Appeler calculc01 pour obtenir la valeur de CO2
-  this.apiService.calculC02({
-    travelType: 'car',
-    distanceKm: distance,
-    Km100Consumption: consumption,
-    typeCarburant: 'jet fuel',
-  }).subscribe({
-    next: quantityCo2 => {
-     
-      console.log({ travel, quantityCo2 });
-      this.carbonFootprintCompute.addTravel({ ...travel, quantityCo2 });
-
-    },
-    error: (err) => {
-      console.error('Erreur lors du calcul du CO2:', err);
-    }
-  });
-}
 
 
 calculateConsumption() {

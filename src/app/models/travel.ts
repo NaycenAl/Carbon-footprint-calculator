@@ -6,12 +6,12 @@ export interface Travel {
 }
 
 export interface  Travel2 {
-    Km100Consumption: any;
+ 
 
     id: number;
     distance: number;
-    consommation: number;
-    co2: number;
+    consommation?: number;
+    co2?: number;
     date: string;
     travelType: string;
     userId: number;

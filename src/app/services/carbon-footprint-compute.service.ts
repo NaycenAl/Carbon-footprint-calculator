@@ -36,33 +36,8 @@ export class CarbonFootprintComputeService {
       }
     });}
 
-  addTravel (travel : any ){
-
-    this.apiService
-    .calculerTrajet(travel.travelType, {
-      distanceKm: travel.distanceKm,
-      consommationPour100Km: travel.Km100Consumption,
-      typeCarburant: travel.typeCarburant, 
-    }).subscribe({
-      next: response => {
-        console.log(response)
-        console.log('Ajout du travel dans le service:', travel);
-        this.travels = [...this.travels, travel];
-        console.log(this.travels)
-      },
-      error: (err) => {
-        console.error('Erreur lors du calcul du CO2:', err);
-      },
-    })
-  }
-
-  // calculateAverage(){
-  //   const resume= this.getResumeVoyages();
   
-  //   this.distanceKm= resume.totalDistance;
-  //   this.Km100Consumption= resume.averageConsumption;
-  //   this.quantityCo2Total = resume.quantityCo2Total;
-  // }
+
 
 
   calculateConsumption() {
@@ -70,11 +45,7 @@ export class CarbonFootprintComputeService {
      
    }
 
-   add100KmToTheDistance() {
-     return this.distanceKm = this.distanceKm + 100;
-   }
- 
- 
+
   //  getResumeVoyages(){
   
   //   let totalDistance = 0;

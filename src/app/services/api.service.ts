@@ -21,7 +21,7 @@ export class ApiService {
    public calculerTrajet(travelType: string, travel: Travel): Observable<any> {
     let params = new HttpParams().set('distanceKm', travel.distanceKm!.toString());
   
-    console.log('Type de transport reçu:', travelType);
+   
     switch (travelType.toLowerCase()) {
       case 'car':
         if (travel.consommationPour100Km) {
