@@ -74,12 +74,6 @@ calculateConsumption() {
   this.distanceKm = this.carbonFootprintCompute.distanceKm;
 }
 
-// calculateAverage(){
-//  const resume= this.carbonFootprintCompute.getResumeVoyages();
 
-//   this.distanceKm= resume.totalDistance;
-//   this.Km100Consumption= resume.averageConsumption;
-//   this.quantityCo2Total = resume.quantityCo2Total;
-// }
 
 }

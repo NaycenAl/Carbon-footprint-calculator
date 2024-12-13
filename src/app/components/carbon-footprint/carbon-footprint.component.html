@@ -3,24 +3,7 @@
   
 
   <div class="container mx-auto p-6 bg-gray-100 rounded-lg shadow-lg overflow-y-auto ">
-    <h2 class="text-2xl font-bold text-gray-700 mb-6">Travel List</h2>
-    <strong>Total Consumption :</strong> {{ distanceKm }} L
-    <strong>Quantity Co2 <span> {{quantityCo2Total }}</span></strong>
-
-    @if(Km100Consumption > 7){
-      <p class="text-red-600">Warning, your consumption is high</p>
-    }
-    @if(Km100Consumption < 4){
-      <p class="text-green-700">Congratulations, your consumption is low</p>
-    }
-
-    <h2 class="text-2xl font-bold text-gray-700 mb-6">Travel List</h2>
-    <button 
-      class="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      (click)="addTravel({distanceKm : 1000, Km100Consumption : 5})">
-      Add Travel
-    </button>
-    
+    <h2 class="text-2xl font-bold text-gray-700 mb-6">My Travels List</h2>
    
 
     <div class="container mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

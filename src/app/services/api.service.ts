@@ -77,8 +77,27 @@ export class ApiService {
   
 }
 
-addTravelForUser1(travel : Travel2){
- let params = new HttpParams().set( 'travel.userId', 1 ).set('distance', travel.distance,).set( 'consommation', travel.consommation).set( 'co2' , travel.co2, ).set('travelType', travel.travelType)
+
+
+getUserCarbonFootprint(): Observable<any> {
+  let params = new HttpParams().set('idUtilisateur', 1);
   
-  return this.httpClient.get(`${this.BASE_URL}/ajouterUnVoyage`, { params });
-}}
+
+  return this.httpClient.get(`${this.BASE_URL}/monEmpreinteCarbone`, { params });
+  
+
+
+}
+addTravelForUser1(travel: Travel2) {
+  
+  const body = {
+    userId: 1,  
+    distance: travel.distance,
+    consommation: travel.consommation,
+    co2: travel.co2,
+    travelType: travel.travelType
+  };
+
+  return this.httpClient.post(`${this.BASE_URL}/ajouterUnVoyage`, body);
+}
+}

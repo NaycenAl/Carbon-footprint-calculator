@@ -2,7 +2,11 @@
   <section class="flex flex-col items-center justify-center text-center py-12">
     <h2 class="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">Reduce Your Carbon Footprint 🌍</h2>
     <p class="text-lg md:text-xl text-gray-600 mb-8">Take the first step towards a sustainable future with our fun and easy-to-use calculator.</p>
-    <button class="px-6 py-3 bg-teal-500 text-white font-bold rounded-full shadow-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-300">Get Started</button>
+
+      <button (click)="goToaddTravel()" class="px-6 py-3 bg-teal-500 text-white font-bold rounded-full shadow-md hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-300">Get Started
+      </button>
+  
+    
   </section>
 
   <section id="about" class="bg-white py-12">
@@ -29,59 +33,10 @@
   <section id="calculate" class="bg-gradient-to-r from-green-600 to-green-900 py-12 text-center">
     <h3 class="text-3xl font-bold text-white mb-4">Calculate Now</h3>
     <p class="text-white mb-6">Start by entering your daily activities and habits.</p>
-    <button class="px-6 py-3 bg-white text-teal-500 font-bold rounded-full shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-300">Start Calculation</button>
+    <button  class="px-6 py-3 bg-white text-teal-500 font-bold rounded-full shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-300">Start Calculation
+    
+    </button>
   </section>
 
-  <section id="tips" class="py-12 bg-white">
-    <div class="container mx-auto px-6 text-center">
-      <h3 class="text-3xl font-bold text-teal-500 mb-4">Eco-Friendly Tips</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Card 1 -->
-        <div class="card shadow-[0px_4px_16px_px_#367E08] h-[400px] w-[280px] group gap-[0.5em] rounded-[1.5em] relative flex justify-end flex-col p-[1.5em] z-[1] overflow-hidden">
-          <div class="absolute top-0 left-0 h-full w-full bg-green-950"></div>
-          <div class="container text-green-300 z-[2] relative font-nunito flex flex-col gap-[0.5em]">
-            <div class="h-fit w-full">
-              <h1 class="card_heading text-[1.5em] tracking-[.2em]" style="font-weight: 900; -webkit-text-fill-color: transparent; -webkit-text-stroke-width: 1px; text-shadow: 0 0 7px #5a8d65;">
-                Switch to LED lights
-              </h1>
-            </div>
-          </div>
-          <p class="font-nunito block text-green-300 font-light relative h-[0em] group-hover:h-[7em] leading-[1.2em] duration-500 overflow-hidden">
-            LED lights are energy-efficient and last longer than regular bulbs.
-          </p>
-        </div>
-        <!-- Card 2 -->
-        <div class="card shadow-[0px_4px_16px_px_#367E08] h-[400px] w-[280px] group gap-[0.5em] rounded-[1.5em] relative flex justify-end flex-col p-[1.5em] z-[1] overflow-hidden">
-          <div class="absolute top-0 left-0 h-full w-full bg-[#111111]"></div>
-          <div class="container text-green-300 z-[2] relative font-nunito flex flex-col gap-[0.5em]">
-            <div class="h-fit w-full">
-              <h1 class="card_heading text-[1.5em] tracking-[.2em]" style="font-weight: 900; -webkit-text-fill-color: transparent; -webkit-text-stroke-width: 1px; text-shadow: 0 0 7px #fff;">
-                Use public transport or carpool
-              </h1>
-            </div>
-          </div>
-          <p class="font-nunito block text-green-300 font-light relative h-[0em] group-hover:h-[7em] leading-[1.2em] duration-500 overflow-hidden">
-            Reducing car use cuts down on emissions and pollution.
-          </p>
-        </div>
-        <!-- Card 3 -->
-        <div class="card shadow-[0px_4px_16px_px_#367E08] h-[400px] w-[280px] group gap-[0.5em] rounded-[1.5em] relative flex justify-end flex-col p-[1.5em] z-[1] overflow-hidden">
-          <div class="absolute top-0 left-0 h-full w-full bg-[#111111]"></div>
-          <div class="container text-white z-[2] relative font-nunito flex flex-col gap-[0.5em]">
-            <div class="h-fit w-full">
-              <h1 class="card_heading text-[1.5em] tracking-[.2em]" style="font-weight: 900; -webkit-text-fill-color: transparent; -webkit-text-stroke-width: 1px; text-shadow: 0 0 7px #fff;">
-                Reduce, reuse, recycle
-              </h1>
-            </div>
-          </div>
-          <p class="font-nunito block text-green-300 font-light relative h-[0em] group-hover:h-[7em] leading-[1.2em] duration-500 overflow-hidden">
-            Always aim to recycle materials and reduce waste.
-          </p>
-        </div>
-        
-       
-      </div>
-    </div>
-  </section>
   
 </main>

@@ -76,8 +76,10 @@ export class CarbonFootprintFormComponent implements OnInit{
       
         console.log({ travel, quantityCo2 });
       
-        this.apiService.addTravelForUser1(travel)
-
+        travel.distance = travel.distanceKm;
+        travel.consommation =  travel.Km100Consumption;
+        travel.travelType = travel.travelType
+        travel.co2 = quantityCo2;
         this.apiService.addTravelForUser1(travel).subscribe({
           next: (response) => {
             console.log('Voyage ajouté avec succès', response);

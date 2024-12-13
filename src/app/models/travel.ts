@@ -6,6 +6,7 @@ export interface Travel {
 }
 
 export interface  Travel2 {
+    Km100Consumption: any;
 
     id: number;
     distance: number;
