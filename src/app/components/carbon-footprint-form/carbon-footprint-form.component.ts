@@ -2,11 +2,15 @@ import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { CarbonFootprintComputeService } from '../../services/carbon-footprint-compute.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-carbon-footprint-form',
   standalone: true,
-  imports: [ReactiveFormsModule  ],
+  
+  imports: [HttpClientModule, ReactiveFormsModule],
+  providers : [ApiService, CarbonFootprintComputeService],
   templateUrl: './carbon-footprint-form.component.html',
   styleUrl: './carbon-footprint-form.component.css'
 })
@@ -16,7 +20,7 @@ export class CarbonFootprintFormComponent implements OnInit{
   public form! : FormGroup;
   public isSubmited: boolean = false;
 
-  constructor(private formBuilder : FormBuilder, private router : Router, private carbonFootPrintService : CarbonFootprintComputeService) {
+  constructor(private formBuilder : FormBuilder, private router : Router, private carbonFootPrintService : CarbonFootprintComputeService, private apiService : ApiService) {
 
   }
 
@@ -57,14 +61,45 @@ export class CarbonFootprintFormComponent implements OnInit{
     return null;
   }
 
-  
+  addTravel(travel: any) {
+
+
+
+    
+    this.apiService.calculC02({
+      travelType: travel.travelType,
+      distanceKm: travel.distanceKm,
+      Km100Consumption: travel.Km100Consumption,
+      typeCarburant: 'diesel',
+    }).subscribe({
+      next: quantityCo2 => {
+      
+        console.log({ travel, quantityCo2 });
+      
+        this.apiService.addTravelForUser1(travel)
+
+        this.apiService.addTravelForUser1(travel).subscribe({
+          next: (response) => {
+            console.log('Voyage ajouté avec succès', response);
+           
+          },
+          error: (err) => {
+            console.error('Erreur lors de l\'ajout du voyage', err);
+          }
+        });
+       
+      },
+      error: (err) => {
+        console.error('Erreur lors du calcul du CO2:', err);
+      }
+    });
+  }
    
   onSubmit() {
     this.isSubmited = true;
     if (this.form.valid){
-       console.log(this.form.value);
       
-       this.carbonFootPrintService.addTravel(this.form.value);
+       this.addTravel(this.form.value);
        this.router.navigate(['/summary']);
        this.isSubmited = false;
     }

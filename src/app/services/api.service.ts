@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
+import { Travel, Travel2 } from '../models/travel';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +17,68 @@ export class ApiService {
    }
 
 
-   public getCalculateTrajetVoiture(distanceKm : number, typeCarburant: string, consommationPour100Km: number) {
+
+   public calculerTrajet(travelType: string, travel: Travel): Observable<any> {
+    let params = new HttpParams().set('distanceKm', travel.distanceKm!.toString());
+  
+    console.log('Type de transport reçu:', travelType);
+    switch (travelType.toLowerCase()) {
+      case 'car':
+        if (travel.consommationPour100Km) {
+          params = params.set('consommationPour100Km', travel.consommationPour100Km.toString());
+        }
+        if (travel.typeCarburant) {
+          params = params.set('typeCarburant', travel.typeCarburant);
+        }
+        return this.httpClient.get(`${this.BASE_URL}/calculerTrajetVoiture`, { params });
+  
+      case 'avion':
+        return this.httpClient.get(`${this.BASE_URL}/calculerTrajetAvion`, { params });
+  
+      case 'train':
+        if (travel.typeCarburant) {
+          params = params.set('typeCarburant', travel.typeCarburant);
+        }
+        return this.httpClient.get(`${this.BASE_URL}/calculerTrajetTrain`, { params });
+  
+      default:
+        throw new Error('Type de transport inconnu.');
+    }
+  }
+
+
+  calculC02(travel: any) : Observable<number>{
+    return this
+      .calculerTrajet(travel.travelType, {
+        distanceKm: travel.distanceKm,
+        consommationPour100Km: travel.Km100Consumption,
+        typeCarburant: travel.typeCarburant,
+      })
+      .pipe(
     
-    const params = new HttpParams().set("distanceKm", distanceKm.toString()).set('typeCarburant', typeCarburant).set('consommationPour100Km', consommationPour100Km.toString())
-    return this.httpClient.get(`${this.BASE_URL}/calculerTrajetTrain`, { params });
-   }
+        map(response => response.empreinteCarbone) 
+      );
+  }
 
-   public getCalculateTrajetAvion() {
-    
-   }
-
-   public calculerTrajetTrain(distanceKm : number, typeCarburant: string) : Observable<any>{
-
-    const params = new HttpParams().set("distanceKm", distanceKm.toString()).set('typeCarburant', typeCarburant)
-    return this.httpClient.get(`${this.BASE_URL}/calculerTrajetTrain`, { params });
-
-   }
+  getTravelForUser1(): Observable<Travel2[]> {
+    return from(
+      fetch(`${this.BASE_URL}/tousMesVoyages/1`)
+        .then(response => response.json())
+        .then(data => {
+          console.log('Voyages de l\'utilisateur 1 :', data);
+          return data; 
+        })
+        .catch(error => {
+          console.error('Erreur lors de la récupération des voyages :', error);
+          throw error;  
+        })
+    );
+ 
+  
 }
+
+addTravelForUser1(travel : Travel2){
+ let params = new HttpParams().set( 'travel.userId', 1 ).set('distance', travel.distance,).set( 'consommation', travel.consommation).set( 'co2' , travel.co2, ).set('travelType', travel.travelType)
+  
+  return this.httpClient.get(`${this.BASE_URL}/ajouterUnVoyage`, { params });
+}}

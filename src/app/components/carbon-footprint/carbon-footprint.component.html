@@ -17,10 +17,11 @@
     <h2 class="text-2xl font-bold text-gray-700 mb-6">Travel List</h2>
     <button 
       class="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      (click)="addTravel()">
+      (click)="addTravel({distanceKm : 1000, Km100Consumption : 5})">
       Add Travel
     </button>
-
+    
+   
 
     <div class="container mx-auto p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   @for (travel of travels; track $index) {
@@ -45,19 +46,14 @@
     
         <!-- Card Content -->
         <div class="z-10 flex flex-col justify-evenly w-full h-full">
-          <span class="text-2xl font-bold">Voyage {{ travel.id }}</span>
+          <span class="text-2xl font-bold">Voyage {{ travel.id | json}}</span>
           <p>
-            <strong>Distance :</strong> {{ travel.distanceKm }} km<br />
-            <strong>Consumption :</strong> {{ travel.Km100Consumption }} L/100km<br />
-            <strong>Co2 :</strong> {{ travel.quantityCo2 }}<br />
+            <strong>Distance :</strong> {{ travel.distance }} km<br />
+            <strong>Consumption :</strong> {{ travel.consommation }} L/100km<br />
+            <strong>Co2 :</strong> {{ travel.co2 }}<br />
         
           </p>
-          <button
-            class="hover:bg-neutral-200 bg-neutral-50 rounded text-neutral-800 font-extrabold w-full p-3"
-            (click)="add100Km()"
-          >
-           +100 km
-          </button>
+         
         </div>
       </div>
     

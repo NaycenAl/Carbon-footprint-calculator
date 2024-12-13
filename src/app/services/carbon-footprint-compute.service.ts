@@ -1,58 +1,68 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
+import { Travel2 } from '../models/travel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarbonFootprintComputeService {
 
-  private travels: any [];
+  private travels: Travel2[] = [];
   public distanceKm! : number;
   public Km100Consumption! : number;
   public totalConsumption?: number;
   public quantityCo2Total! : number;
+  public  travelType!: string;
 
-  constructor() {
+  constructor(private apiService :ApiService) {
 
-    this.travels = [
-      { distanceKm: 50, Km100Consumption: 5, quantityCo2 : 5.75 },
-      { distanceKm: 150, Km100Consumption: 6, quantityCo2 : 20.7 },
-      { distanceKm: 250, Km100Consumption: 7 , quantityCo2 : 40.25},
-      { distanceKm: 350, Km100Consumption: 8, quantityCo2 : 64.4 },
-      { distanceKm: 450, Km100Consumption: 9 , quantityCo2 : 93.15}
-  ];
+    
    }
 
+   getTravels() {
 
-  getTravels() {
-    return this.travels;
-   }
+    this.apiService.getTravelForUser1().subscribe({
+      next: (response: Travel2[]) => {
+        if (Array.isArray(response)) {
+           
+          this.travels = response; 
+          console.log(this.travels, 'travels')
+        } else {
+          console.error('Réponse incorrecte de l\'API', response);
+        }
+      },
+      error: (err) => {
+        console.error('Erreur lors de la récupération des voyages:', err);
+      }
+    });}
 
   addTravel (travel : any ){
 
-   switch(travel.travelType){
-    case "car": 
-      travel.quantityCo2 = Math.ceil(travel.distanceKm * travel.Km100Consumption * 2.3 / 100);
-      break;
-    case "plane": 
-    travel.quantityCo2 = Math.ceil(travel.distanceKm * travel.Km100Consumption * 200);
-    break;
-    case "train": 
-    travel.quantityCo2 = Math.ceil(travel.distanceKm * travel.Km100Consumption * 0.03 );
-      break;
-   }
-    
-   this.travels.push(travel);
-
-    
+    this.apiService
+    .calculerTrajet(travel.travelType, {
+      distanceKm: travel.distanceKm,
+      consommationPour100Km: travel.Km100Consumption,
+      typeCarburant: travel.typeCarburant, 
+    }).subscribe({
+      next: response => {
+        console.log(response)
+        console.log('Ajout du travel dans le service:', travel);
+        this.travels = [...this.travels, travel];
+        console.log(this.travels)
+      },
+      error: (err) => {
+        console.error('Erreur lors du calcul du CO2:', err);
+      },
+    })
   }
 
-  calculateAverage(){
-    const resume= this.getResumeVoyages();
+  // calculateAverage(){
+  //   const resume= this.getResumeVoyages();
   
-    this.distanceKm= resume.totalDistance;
-    this.Km100Consumption= resume.averageConsumption;
-    this.quantityCo2Total = resume.quantityCo2Total;
-  }
+  //   this.distanceKm= resume.totalDistance;
+  //   this.Km100Consumption= resume.averageConsumption;
+  //   this.quantityCo2Total = resume.quantityCo2Total;
+  // }
 
 
   calculateConsumption() {
@@ -65,19 +75,19 @@ export class CarbonFootprintComputeService {
    }
  
  
-   getResumeVoyages(){
+  //  getResumeVoyages(){
   
-    let totalDistance = 0;
-    let  averageConsumption = 0;
-    let quantityCo2Total = 0;
+  //   let totalDistance = 0;
+  //   let  averageConsumption = 0;
+  //   let quantityCo2Total = 0;
 
-    for(const travel of this.travels){
-      totalDistance +=travel.distanceKm;
-      averageConsumption += travel.Km100Consumption * travel.distanceKm;
-      quantityCo2Total += travel.quantityCo2;
-    }
+  //   for(const travel of this.travels){
+  //     totalDistance +=travel.distanceKm;
+  //     averageConsumption += travel.Km100Consumption * travel.distanceKm;
+  //     quantityCo2Total += travel.quantityCo2;
+  //   }
 
-    return {"totalDistance": totalDistance, "averageConsumption":averageConsumption / totalDistance , "quantityCo2Total": quantityCo2Total}
-  } 
+  //   return {"totalDistance": totalDistance, "averageConsumption":averageConsumption / totalDistance , "quantityCo2Total": quantityCo2Total}
+  // } 
 
 }
